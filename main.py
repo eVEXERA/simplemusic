@@ -1,6 +1,6 @@
 import asyncio
 from pytgcalls import idle
-from vexera import call_py, bot
+from driver.vexera import call_py, bot
 
 async def start_bot():
     print("[INFO]: STARTING BOT CLIENT")
