@@ -229,7 +229,7 @@ async def play(c: Client, m: Message):
                 duration = search[2]
                 thumbnail = search[3]
                 format = "bestaudio/best"
-                veez, ytlink = await ytdl(format, url)
+                veez, ytlink = await ytdl(url)
                 if veez == 0:
                     await suhu.edit(f"❌ yt-dl issues detected\n\n» `{ytlink}`")
                 else:
