@@ -35,7 +35,7 @@ async def ytdl(format: str, link: str):
     return 0, stderr
 
 
-@Client.on_message(command(["mplay", f"mplay@{BOT_USERNAME}"]) & other_filters)
+@Client.on_message(command(["play", f"mplay@{BOT_USERNAME}"]) & other_filters)
 async def play(c: Client, m: Message):
     await m.delete()
     replied = m.reply_to_message
@@ -218,7 +218,7 @@ async def play(c: Client, m: Message):
                 url = search[1]
                 duration = search[2]
                 thumbnail = search[3]
-                format = "bestaudio[ext=m4a]"
+                format = "bestaudio/best"
                 veez, ytlink = await ytdl(format, url)
                 if veez == 0:
                     await suhu.edit(f"❌ yt-dl issues detected\n\n» `{ytlink}`")
