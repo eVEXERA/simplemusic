@@ -28,11 +28,21 @@ def ytsearch(query: str):
         return 0
 
 
-async def ytdl(format: str, link: str):
-    stdout, stderr = await bash(f'youtube-dl -g -f "{format}" {link}')
+async def ytdl(link):
+    proc = await asyncio.create_subprocess_exec(
+        "yt-dlp",
+        "-g",
+        "-f",
+        "bestaudio/best",
+        f"{link}",
+        stdout=asyncio.subprocess.PIPE,
+        stderr=asyncio.subprocess.PIPE,
+    )
+    stdout, stderr = await proc.communicate()
     if stdout:
-        return 1, stdout.split("\n")[0]
-    return 0, stderr
+        return 1, stdout.decode().split("\n")[0]
+    else:
+        return 0, stderr.decode()
 
 
 @Client.on_message(command(["play", f"mplay@{BOT_USERNAME}"]) & other_filters)
