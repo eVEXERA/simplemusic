@@ -5,7 +5,7 @@ py-tgcalls==0.8.1rc1
 git+https://github.com/pyrogram/pyrogram
 youtube-search-python==1.4.9
 yt-dlp==2021.11.10.1
-youtube-dl-2021.12.17
+youtube-dl==2021.12.17
 youtube-search
 python-dotenv
 dnspython
