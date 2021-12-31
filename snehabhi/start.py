@@ -11,7 +11,7 @@ from config import (
     OWNER_NAME,
     UPDATES_CHANNEL,
 )
-f
+
 
 from driver.vexera import user
 from driver.filters import command, other_filters
