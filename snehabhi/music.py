@@ -28,22 +28,15 @@ def ytsearch(query: str):
         return 0
 
 
-async def ytdl(link):
-    proc = await asyncio.create_subprocess_exec(
-        "youtube-dl",
-        "-g",
-        "-f",
-        "bestaudio/best",
-        f"{link}",
-        stdout=asyncio.subprocess.PIPE,
-        stderr=asyncio.subprocess.PIPE,
-    )
-    stdout, stderr = await proc.communicate()
-    if stdout:
-        return 1, stdout.decode().split("\n")[0]
-    else:
-        return 0, stderr.decode()
+async def ytdl(format: str, link: str):
 
+    stdout, stderr = await bash(f'youtube-dl -g -f "{format}" {link}')
+
+    if stdout:
+
+        return 1, stdout.split("\n")[0]
+
+    return 0, stderr
 
 @Client.on_message(command(["play", f"mplay@{BOT_USERNAME}"]) & other_filters)
 async def play(c: Client, m: Message):
@@ -218,7 +211,7 @@ async def play(c: Client, m: Message):
                 "» reply to an **audio file** or **give something to search.**"
             )
         else:
-            suhu = await c.send_message(chat_id, "🔍 **Searching...**")
+            suhu = await c.send_message(chat_id, "🔍")
             query = m.text.split(None, 1)[1]
             search = ytsearch(query)
             if search == 0:
@@ -229,7 +222,7 @@ async def play(c: Client, m: Message):
                 duration = search[2]
                 thumbnail = search[3]
                 format = "bestaudio/best"
-                veez, ytlink = await ytdl(url)
+                veez, ytlink = await ytdl(format, url)
                 if veez == 0:
                     await suhu.edit(f"❌ yt-dl issues detected\n\n» `{ytlink}`")
                 else:
