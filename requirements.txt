@@ -6,7 +6,7 @@ git+https://github.com/pyrogram/pyrogram@master
 py-tgcalls==0.8.1rc1
 
 youtube-search-python
-youtube-dl
+git+https://github.com/ytdl-org/youtube-dl@master
 
 youtube-search
 python-dotenv
