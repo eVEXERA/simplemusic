@@ -13,7 +13,7 @@ from pytgcalls import StreamType
 from pytgcalls.types.input_stream import AudioPiped
 from youtubesearchpython import VideosSearch
 import yt_dlp
-
+import youtube_dl
 def ytsearch(query: str):
     try:
         search = VideosSearch(query, limit=1).result()
